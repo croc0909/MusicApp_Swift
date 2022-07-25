@@ -14,6 +14,12 @@
 		42CE6A06288CEA27007229E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CE6A04288CEA27007229E0 /* Main.storyboard */; };
 		42CE6A08288CEA2A007229E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CE6A07288CEA2A007229E0 /* Assets.xcassets */; };
 		42CE6A0B288CEA2A007229E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CE6A09288CEA2A007229E0 /* LaunchScreen.storyboard */; };
+		42FD3683288E292900C93FDF /* musicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FD3682288E292900C93FDF /* musicList.swift */; };
+		42FD368A288E2A3F00C93FDF /* 孤獨.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42FD3685288E2A3E00C93FDF /* 孤獨.mp3 */; };
+		42FD368B288E2A3F00C93FDF /* 逆光.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42FD3686288E2A3E00C93FDF /* 逆光.mp3 */; };
+		42FD368C288E2A3F00C93FDF /* 暫時的記號.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42FD3687288E2A3F00C93FDF /* 暫時的記號.mp3 */; };
+		42FD368D288E2A3F00C93FDF /* LoveIsACompass.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42FD3688288E2A3F00C93FDF /* LoveIsACompass.mp3 */; };
+		42FD368E288E2A3F00C93FDF /* 慢冷.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42FD3689288E2A3F00C93FDF /* 慢冷.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,12 @@
 		42CE6A07288CEA2A007229E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42CE6A0A288CEA2A007229E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42CE6A0C288CEA2A007229E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42FD3682288E292900C93FDF /* musicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musicList.swift; sourceTree = "<group>"; };
+		42FD3685288E2A3E00C93FDF /* 孤獨.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "孤獨.mp3"; sourceTree = "<group>"; };
+		42FD3686288E2A3E00C93FDF /* 逆光.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "逆光.mp3"; sourceTree = "<group>"; };
+		42FD3687288E2A3F00C93FDF /* 暫時的記號.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "暫時的記號.mp3"; sourceTree = "<group>"; };
+		42FD3688288E2A3F00C93FDF /* LoveIsACompass.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LoveIsACompass.mp3; sourceTree = "<group>"; };
+		42FD3689288E2A3F00C93FDF /* 慢冷.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "慢冷.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +54,7 @@
 		42CE69F2288CEA27007229E0 = {
 			isa = PBXGroup;
 			children = (
+				42FD3684288E2A0000C93FDF /* MusicFile */,
 				42CE69FD288CEA27007229E0 /* MusicApp_Swift */,
 				42CE69FC288CEA27007229E0 /* Products */,
 			);
@@ -63,11 +76,24 @@
 				42CE6A02288CEA27007229E0 /* ViewController.swift */,
 				42CE6A04288CEA27007229E0 /* Main.storyboard */,
 				42A9231D288D3EB800D9417E /* MusciPlayController.swift */,
+				42FD3682288E292900C93FDF /* musicList.swift */,
 				42CE6A07288CEA2A007229E0 /* Assets.xcassets */,
 				42CE6A09288CEA2A007229E0 /* LaunchScreen.storyboard */,
 				42CE6A0C288CEA2A007229E0 /* Info.plist */,
 			);
 			path = MusicApp_Swift;
+			sourceTree = "<group>";
+		};
+		42FD3684288E2A0000C93FDF /* MusicFile */ = {
+			isa = PBXGroup;
+			children = (
+				42FD3685288E2A3E00C93FDF /* 孤獨.mp3 */,
+				42FD3686288E2A3E00C93FDF /* 逆光.mp3 */,
+				42FD3689288E2A3F00C93FDF /* 慢冷.mp3 */,
+				42FD3687288E2A3F00C93FDF /* 暫時的記號.mp3 */,
+				42FD3688288E2A3F00C93FDF /* LoveIsACompass.mp3 */,
+			);
+			path = MusicFile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,9 +154,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42FD368B288E2A3F00C93FDF /* 逆光.mp3 in Resources */,
+				42FD368A288E2A3F00C93FDF /* 孤獨.mp3 in Resources */,
 				42CE6A0B288CEA2A007229E0 /* LaunchScreen.storyboard in Resources */,
+				42FD368C288E2A3F00C93FDF /* 暫時的記號.mp3 in Resources */,
 				42CE6A08288CEA2A007229E0 /* Assets.xcassets in Resources */,
+				42FD368E288E2A3F00C93FDF /* 慢冷.mp3 in Resources */,
 				42CE6A06288CEA27007229E0 /* Main.storyboard in Resources */,
+				42FD368D288E2A3F00C93FDF /* LoveIsACompass.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +176,7 @@
 				42CE69FF288CEA27007229E0 /* AppDelegate.swift in Sources */,
 				42CE6A01288CEA27007229E0 /* SceneDelegate.swift in Sources */,
 				42A9231E288D3EB800D9417E /* MusciPlayController.swift in Sources */,
+				42FD3683288E292900C93FDF /* musicList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +330,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,6 +358,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
