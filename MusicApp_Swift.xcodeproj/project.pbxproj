@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42A9231E288D3EB800D9417E /* MusciPlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9231D288D3EB800D9417E /* MusciPlayController.swift */; };
 		42CE69FF288CEA27007229E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE69FE288CEA27007229E0 /* AppDelegate.swift */; };
 		42CE6A01288CEA27007229E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE6A00288CEA27007229E0 /* SceneDelegate.swift */; };
 		42CE6A03288CEA27007229E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE6A02288CEA27007229E0 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42A9231D288D3EB800D9417E /* MusciPlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusciPlayController.swift; sourceTree = "<group>"; };
 		42CE69FB288CEA27007229E0 /* MusicApp_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE69FE288CEA27007229E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CE6A00288CEA27007229E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				42CE6A00288CEA27007229E0 /* SceneDelegate.swift */,
 				42CE6A02288CEA27007229E0 /* ViewController.swift */,
 				42CE6A04288CEA27007229E0 /* Main.storyboard */,
+				42A9231D288D3EB800D9417E /* MusciPlayController.swift */,
 				42CE6A07288CEA2A007229E0 /* Assets.xcassets */,
 				42CE6A09288CEA2A007229E0 /* LaunchScreen.storyboard */,
 				42CE6A0C288CEA2A007229E0 /* Info.plist */,
@@ -141,6 +144,7 @@
 				42CE6A03288CEA27007229E0 /* ViewController.swift in Sources */,
 				42CE69FF288CEA27007229E0 /* AppDelegate.swift in Sources */,
 				42CE6A01288CEA27007229E0 /* SceneDelegate.swift in Sources */,
+				42A9231E288D3EB800D9417E /* MusciPlayController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
