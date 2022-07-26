@@ -25,17 +25,20 @@ class MusciPlayController: UIViewController {
     
     let player = AVPlayer()
     var playerItem:AVPlayerItem!
-    
+    var asset:AVAsset?
+
     var musicIndex = 0 // 目前音樂曲目
-    var shuffleIndex = false // 隨機撥放是否被開啟
+    var playMusicBool = false //目前是播放或暫停
+    var shuffleBool = false // 隨機撥放是否開啟
+    var repeatBool = false // 重複播放是否開啟
+    
     
     @IBAction func playAction(_ sender: Any) {
-        print("Play")
-        playMusic()
+        playOrPauseMusic()
     }
     
     @IBAction func backAction(_ sender: Any) {
-        
+        playPreviousSound()
     }
     
     @IBAction func nextAction(_ sender: Any) {
@@ -43,11 +46,11 @@ class MusciPlayController: UIViewController {
     }
     
     @IBAction func repeatAction(_ sender: Any) {
-        
+        chackRepeat()
     }
     
     @IBAction func shuffleAction(_ sender: Any) {
-        
+        checkShuffle()
     }
     
     @IBAction func playTimeChange(_ sender: UISlider) {
@@ -58,25 +61,36 @@ class MusciPlayController: UIViewController {
         print("sender.maximumValue\(sender.maximumValue)")
     }
     
-    
-    @IBAction func volumeChange(_ sender: Any) {
-        
+    @IBAction func volumeChange(_ sender: UISlider) {
+        player.volume = volumeSlider.value
     }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
+        initialization()
+        // Do any additional setup after loading the view.
+    }
+    
+    func initialization(){
         playMusic()
         updateUI()
-        nowPlayTime()
         updateMusicTime()
-        // Do any additional setup after loading the view.
+        nowPlayTime()
+        musicEnd()
+        repeatButton.setImage(setbuttonImage(systemName: "repeat.circle", pointSize: 20), for: .normal)
+        shuffleButton.setImage(setbuttonImage(systemName: "shuffle.circle", pointSize: 20), for: .normal)
+        playButton.setImage(setbuttonImage(systemName: "pause.fill", pointSize: 30), for: .normal)
+        nextButton.setImage(setbuttonImage(systemName: "forward.end.fill", pointSize: 30), for: .normal)
+        backButton.setImage(setbuttonImage(systemName:"backward.end.fill" , pointSize: 30), for: .normal)
     }
     
     //播放音樂
     func playMusic() {
         let fileUrl = Bundle.main.url(forResource: musicList[musicIndex].musicFile, withExtension: "mp3")!
-                let playerItem = AVPlayerItem(url: fileUrl)
+                playerItem = AVPlayerItem(url: fileUrl)
                 player.replaceCurrentItem(with: playerItem)
                 player.play()
     }
@@ -90,30 +104,60 @@ class MusciPlayController: UIViewController {
     
     //播放下一首歌 musicIndex是musiclist裡的
     func playNextSound() {
-        if shuffleIndex {
+        if shuffleBool {
             musicIndex = Int.random(in: 0...musicList.count - 1)
             updateUI()
             playMusic()
-            //updateMusicUI()
+            updateMusicTime()
         }else{
             musicIndex += 1
             if musicIndex < musicList.count {
                 updateUI()
                 playMusic()
-                //updateMusicUI()
+                updateMusicTime()
             }else{
                 musicIndex = 0
                 updateUI()
                 playMusic()
-                //updateMusicUI()
+                updateMusicTime()
             }
-            
+        }
+    }
+    
+    //播放上一首歌 musicIndex是musiclist裡的
+    func playPreviousSound() {
+        if shuffleBool {
+            musicIndex = Int.random(in: 0...musicList.count - 1)
+            updateUI()
+            playMusic()
+            updateMusicTime()
+        }else{
+            if musicIndex != 0{
+                musicIndex -= 1
+                if musicIndex < musicList.count {
+                    updateUI()
+                    playMusic()
+                    updateMusicTime()
+                }else{
+                    musicIndex = 0
+                    updateUI()
+                    playMusic()
+                    updateMusicTime()
+                }
+            }else
+            {
+                musicIndex = musicList.count - 1
+                updateUI()
+                playMusic()
+                updateMusicTime()
+            }
         }
     }
     
     //歌曲播放時間
     //更新歌曲時確認歌的時間讓Slider也更新
     func updateMusicTime() {
+        print("updateMusicTime")
         guard let timeduration = playerItem?.asset.duration else{
             return
         }
@@ -149,6 +193,69 @@ class MusciPlayController: UIViewController {
     self.startTimeLabel.text = self.timeShow(time: currenTime)
     }
     })
+    }
+    
+    //設定Button圖示大小跟圖案
+    func setbuttonImage(systemName:String,pointSize:Int) -> UIImage? {
+        let sfsymbol = UIImage.SymbolConfiguration(pointSize: CGFloat(pointSize), weight: .bold , scale: .large )
+        let sfsymbolImage = UIImage(systemName: systemName, withConfiguration: sfsymbol)
+        return sfsymbolImage
+        
+    }
+    
+    //確認音樂結束
+    func musicEnd(){
+    //        叫出  NotificationCenter.default.addObserver來確認音樂是否結束
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { (_) in
+    //            如果結束有打開repeatBool 就會從頭播放
+    if self.repeatBool{
+    let musicEndTime: CMTime = CMTimeMake(value: 0, timescale: 1)
+    self.player.seek(to: musicEndTime)
+    self.player.play()
+    }else{
+    //            如果結束沒有打開repeatBool就會撥下一首歌
+    self.playNextSound()
+    }
+    }
+    }
+    
+    //暫停音樂或播放音樂
+    func playOrPauseMusic()
+    {
+        if !playMusicBool {
+            playMusicBool = true
+            player.pause()
+            playButton.setImage(setbuttonImage(systemName: "play.fill", pointSize: 30), for: .normal)
+        }else{
+            playMusicBool = false
+            player.play()
+            playButton.setImage(setbuttonImage(systemName: "pause.fill", pointSize: 30), for: .normal)
+        }
+    }
+    
+    //檢查是否隨機播放
+    func checkShuffle()
+    {
+        if !shuffleBool{
+            shuffleBool = true
+            shuffleButton.setImage(setbuttonImage(systemName: "shuffle.circle.fill", pointSize: 20), for: .normal)
+        }else{
+            shuffleBool = false
+            shuffleButton.setImage(setbuttonImage(systemName: "shuffle.circle", pointSize: 20), for: .normal)
+        }
+    }
+    
+    //檢查是否重複播放
+    func chackRepeat()
+    {
+        if !repeatBool{
+            repeatBool = true
+            repeatButton.setImage(setbuttonImage(systemName: "repeat.circle.fill", pointSize: 20), for: .normal)
+        }else
+        {
+            repeatBool = false
+            repeatButton.setImage(setbuttonImage(systemName: "repeat.circle", pointSize: 20), for: .normal)
+        }
     }
     /*
     // MARK: - Navigation
