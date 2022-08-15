@@ -23,6 +23,8 @@ class MusciPlayController: UIViewController {
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var volumeSlider: UISlider!
     
+    let musicPlayList: music
+    
     let player = AVPlayer()
     var playerItem:AVPlayerItem!
     var asset:AVAsset?
@@ -32,6 +34,38 @@ class MusciPlayController: UIViewController {
     var shuffleBool = false // 隨機撥放是否開啟
     var repeatBool = false // 重複播放是否開啟
     
+    
+    init?(coder: NSCoder, musicList: music) {
+        self.musicPlayList = musicList
+        //print("musicPlayList \(musicPlayList)")
+        // 將傳過來的歌曲編號帶入
+        let indexInt = Int(self.musicPlayList.musicNumber) ?? 0
+        musicIndex = indexInt
+        super.init(coder: coder)
+    }
+         required init?(coder: NSCoder) {
+             fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialization()
+        // Do any additional setup after loading the view.
+    }
+    
+    func initialization(){
+        playMusic()
+        updateUI()
+        updateMusicTime()
+        nowPlayTime()
+        musicEnd()
+        repeatButton.setImage(setbuttonImage(systemName: "repeat.circle", pointSize: 20), for: .normal)
+        shuffleButton.setImage(setbuttonImage(systemName: "shuffle.circle", pointSize: 20), for: .normal)
+        playButton.setImage(setbuttonImage(systemName: "pause.fill", pointSize: 30), for: .normal)
+        nextButton.setImage(setbuttonImage(systemName: "forward.end.fill", pointSize: 30), for: .normal)
+        backButton.setImage(setbuttonImage(systemName:"backward.end.fill" , pointSize: 30), for: .normal)
+    }
     
     @IBAction func playAction(_ sender: Any) {
         playOrPauseMusic()
@@ -65,53 +99,40 @@ class MusciPlayController: UIViewController {
         player.volume = volumeSlider.value
     }
     
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("viewDidLoad")
-        initialization()
-        // Do any additional setup after loading the view.
-    }
-    
-    func initialization(){
-        playMusic()
-        updateUI()
-        updateMusicTime()
-        nowPlayTime()
-        musicEnd()
-        repeatButton.setImage(setbuttonImage(systemName: "repeat.circle", pointSize: 20), for: .normal)
-        shuffleButton.setImage(setbuttonImage(systemName: "shuffle.circle", pointSize: 20), for: .normal)
-        playButton.setImage(setbuttonImage(systemName: "pause.fill", pointSize: 30), for: .normal)
-        nextButton.setImage(setbuttonImage(systemName: "forward.end.fill", pointSize: 30), for: .normal)
-        backButton.setImage(setbuttonImage(systemName:"backward.end.fill" , pointSize: 30), for: .normal)
-    }
     
     //播放音樂
     func playMusic() {
-        let fileUrl = Bundle.main.url(forResource: musicList[musicIndex].musicFile, withExtension: "mp3")!
-                playerItem = AVPlayerItem(url: fileUrl)
-                player.replaceCurrentItem(with: playerItem)
-                player.play()
+        print("player.pause")
+        let fileUrl = Bundle.main.url(forResource: MusicList[musicIndex].musicFile, withExtension: "mp3")!
+        playerItem = AVPlayerItem(url: fileUrl)
+        player.replaceCurrentItem(with: playerItem)
+        player.play()
+    }
+    
+    // 停止播放音樂
+    func stopMusic(){
+        // 停止 player 音樂
+        player.replaceCurrentItem(with: nil)
+        print("STOP Music")
     }
     
     //更新歌曲、歌手、畫面圖片
     func updateUI() {
-        musicNameLabel.text = musicList[musicIndex].musicName
-        singerNameLabel.text = musicList[musicIndex].musicSinger
-        musicImageView.image = UIImage(named: musicList[musicIndex].musicImage)
+        musicNameLabel.text = MusicList[musicIndex].musicName
+        singerNameLabel.text = MusicList[musicIndex].musicSinger
+        musicImageView.image = UIImage(named: MusicList[musicIndex].musicImage)
     }
     
     //播放下一首歌 musicIndex是musiclist裡的
     func playNextSound() {
         if shuffleBool {
-            musicIndex = Int.random(in: 0...musicList.count - 1)
+            musicIndex = Int.random(in: 0...MusicList.count - 1)
             updateUI()
             playMusic()
             updateMusicTime()
         }else{
             musicIndex += 1
-            if musicIndex < musicList.count {
+            if musicIndex < MusicList.count {
                 updateUI()
                 playMusic()
                 updateMusicTime()
@@ -127,14 +148,14 @@ class MusciPlayController: UIViewController {
     //播放上一首歌 musicIndex是musiclist裡的
     func playPreviousSound() {
         if shuffleBool {
-            musicIndex = Int.random(in: 0...musicList.count - 1)
+            musicIndex = Int.random(in: 0...MusicList.count - 1)
             updateUI()
             playMusic()
             updateMusicTime()
         }else{
             if musicIndex != 0{
                 musicIndex -= 1
-                if musicIndex < musicList.count {
+                if musicIndex < MusicList.count {
                     updateUI()
                     playMusic()
                     updateMusicTime()
@@ -146,7 +167,7 @@ class MusciPlayController: UIViewController {
                 }
             }else
             {
-                musicIndex = musicList.count - 1
+                musicIndex = MusicList.count - 1
                 updateUI()
                 playMusic()
                 updateMusicTime()
@@ -154,8 +175,7 @@ class MusciPlayController: UIViewController {
         }
     }
     
-    //歌曲播放時間
-    //更新歌曲時確認歌的時間讓Slider也更新
+    //歌曲播放時間 更新歌曲時確認歌的時間讓Slider也更新
     func updateMusicTime() {
         print("updateMusicTime")
         guard let timeduration = playerItem?.asset.duration else{
@@ -179,17 +199,17 @@ class MusciPlayController: UIViewController {
         return timeString
     }
     
-    //    播放幾秒的Func 不懂
+    // 播放幾秒的Func
     func nowPlayTime(){
-    //        播放的計數器從1開始每一秒都在播放
+    // 播放的計數器從1開始每一秒都在播放
     player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: DispatchQueue.main, using: { (CMTime) in
-    //          如果音樂要播放
+    // 如果音樂要播放
     if self.player.currentItem?.status == .readyToPlay{
-    //                就會得到player播放的時間
+    // 取得player播放每秒的時間
     let currenTime = CMTimeGetSeconds(self.player.currentTime())
-    //                Slider移動就會等於currenTime的時間
+    // Slider移動就會等於currenTime的時間
     self.playTimeSlider.value = Float(currenTime)
-    //                顯示播放了幾秒
+    // 顯示播放了幾秒
     self.startTimeLabel.text = self.timeShow(time: currenTime)
     }
     })
@@ -205,15 +225,15 @@ class MusciPlayController: UIViewController {
     
     //確認音樂結束
     func musicEnd(){
-    //        叫出  NotificationCenter.default.addObserver來確認音樂是否結束
+    // 使用  NotificationCenter.default.addObserver來確認音樂是否結束
     NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { (_) in
-    //            如果結束有打開repeatBool 就會從頭播放
+    //  樂播放結束有開起 repeatBool 就會從頭播放
     if self.repeatBool{
     let musicEndTime: CMTime = CMTimeMake(value: 0, timescale: 1)
     self.player.seek(to: musicEndTime)
     self.player.play()
     }else{
-    //            如果結束沒有打開repeatBool就會撥下一首歌
+    // 如果結束沒有打開repeatBool就會撥下一首歌
     self.playNextSound()
     }
     }
@@ -257,6 +277,12 @@ class MusciPlayController: UIViewController {
             repeatButton.setImage(setbuttonImage(systemName: "repeat.circle", pointSize: 20), for: .normal)
         }
     }
+    
+    // 換頁時
+    override func viewWillDisappear(_ animated: Bool) {
+        self.stopMusic()
+    }
+    
     /*
     // MARK: - Navigation
 

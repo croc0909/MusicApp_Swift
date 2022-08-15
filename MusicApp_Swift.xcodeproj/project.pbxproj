@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		428EFD1028910D6900C64F53 /* homeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428EFD0F28910D6900C64F53 /* homeTableViewController.swift */; };
+		428EFD132891105000C64F53 /* songListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428EFD112891105000C64F53 /* songListTableViewCell.swift */; };
+		428EFD142891105000C64F53 /* songListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 428EFD122891105000C64F53 /* songListTableViewCell.xib */; };
 		42A9231E288D3EB800D9417E /* MusciPlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9231D288D3EB800D9417E /* MusciPlayController.swift */; };
+		42C0D69B2890103C0083779E /* songListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C0D69A2890103C0083779E /* songListViewController.swift */; };
+		42C9597228AA1A6E00385E26 /* musicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C9597128AA1A6E00385E26 /* musicTableViewCell.swift */; };
+		42C9597628AA358400385E26 /* i'm with you.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42C9597528AA358400385E26 /* i'm with you.mp3 */; };
+		42C9597828AA37A600385E26 /* Teenage Dream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42C9597728AA37A600385E26 /* Teenage Dream.mp3 */; };
 		42CE69FF288CEA27007229E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE69FE288CEA27007229E0 /* AppDelegate.swift */; };
 		42CE6A01288CEA27007229E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE6A00288CEA27007229E0 /* SceneDelegate.swift */; };
 		42CE6A03288CEA27007229E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE6A02288CEA27007229E0 /* ViewController.swift */; };
@@ -23,7 +30,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		428EFD0F28910D6900C64F53 /* homeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeTableViewController.swift; sourceTree = "<group>"; };
+		428EFD112891105000C64F53 /* songListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = songListTableViewCell.swift; sourceTree = "<group>"; };
+		428EFD122891105000C64F53 /* songListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = songListTableViewCell.xib; sourceTree = "<group>"; };
 		42A9231D288D3EB800D9417E /* MusciPlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusciPlayController.swift; sourceTree = "<group>"; };
+		42C0D69A2890103C0083779E /* songListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = songListViewController.swift; sourceTree = "<group>"; };
+		42C9597128AA1A6E00385E26 /* musicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musicTableViewCell.swift; sourceTree = "<group>"; };
+		42C9597528AA358400385E26 /* i'm with you.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "i'm with you.mp3"; sourceTree = "<group>"; };
+		42C9597728AA37A600385E26 /* Teenage Dream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Teenage Dream.mp3"; sourceTree = "<group>"; };
 		42CE69FB288CEA27007229E0 /* MusicApp_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CE69FE288CEA27007229E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CE6A00288CEA27007229E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,11 +65,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		428EFD152891105B00C64F53 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		42C9596F28A9D46000385E26 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				42FD3682288E292900C93FDF /* musicList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		42C9597028A9D49500385E26 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				428EFD112891105000C64F53 /* songListTableViewCell.swift */,
+				428EFD122891105000C64F53 /* songListTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		42CE69F2288CEA27007229E0 = {
 			isa = PBXGroup;
 			children = (
 				42FD3684288E2A0000C93FDF /* MusicFile */,
+				42C9597028A9D49500385E26 /* View */,
+				42C9596F28A9D46000385E26 /* Model */,
 				42CE69FD288CEA27007229E0 /* MusicApp_Swift */,
+				428EFD152891105B00C64F53 /* TableViewCell */,
 				42CE69FC288CEA27007229E0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,8 +116,10 @@
 				42CE6A00288CEA27007229E0 /* SceneDelegate.swift */,
 				42CE6A02288CEA27007229E0 /* ViewController.swift */,
 				42CE6A04288CEA27007229E0 /* Main.storyboard */,
+				42C0D69A2890103C0083779E /* songListViewController.swift */,
 				42A9231D288D3EB800D9417E /* MusciPlayController.swift */,
-				42FD3682288E292900C93FDF /* musicList.swift */,
+				42C9597128AA1A6E00385E26 /* musicTableViewCell.swift */,
+				428EFD0F28910D6900C64F53 /* homeTableViewController.swift */,
 				42CE6A07288CEA2A007229E0 /* Assets.xcassets */,
 				42CE6A09288CEA2A007229E0 /* LaunchScreen.storyboard */,
 				42CE6A0C288CEA2A007229E0 /* Info.plist */,
@@ -92,6 +135,8 @@
 				42FD3689288E2A3F00C93FDF /* 慢冷.mp3 */,
 				42FD3687288E2A3F00C93FDF /* 暫時的記號.mp3 */,
 				42FD3688288E2A3F00C93FDF /* LoveIsACompass.mp3 */,
+				42C9597528AA358400385E26 /* i'm with you.mp3 */,
+				42C9597728AA37A600385E26 /* Teenage Dream.mp3 */,
 			);
 			path = MusicFile;
 			sourceTree = "<group>";
@@ -159,8 +204,11 @@
 				42CE6A0B288CEA2A007229E0 /* LaunchScreen.storyboard in Resources */,
 				42FD368C288E2A3F00C93FDF /* 暫時的記號.mp3 in Resources */,
 				42CE6A08288CEA2A007229E0 /* Assets.xcassets in Resources */,
+				42C9597828AA37A600385E26 /* Teenage Dream.mp3 in Resources */,
+				42C9597628AA358400385E26 /* i'm with you.mp3 in Resources */,
 				42FD368E288E2A3F00C93FDF /* 慢冷.mp3 in Resources */,
 				42CE6A06288CEA27007229E0 /* Main.storyboard in Resources */,
+				428EFD142891105000C64F53 /* songListTableViewCell.xib in Resources */,
 				42FD368D288E2A3F00C93FDF /* LoveIsACompass.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,7 +224,11 @@
 				42CE69FF288CEA27007229E0 /* AppDelegate.swift in Sources */,
 				42CE6A01288CEA27007229E0 /* SceneDelegate.swift in Sources */,
 				42A9231E288D3EB800D9417E /* MusciPlayController.swift in Sources */,
+				42C9597228AA1A6E00385E26 /* musicTableViewCell.swift in Sources */,
+				428EFD132891105000C64F53 /* songListTableViewCell.swift in Sources */,
 				42FD3683288E292900C93FDF /* musicList.swift in Sources */,
+				428EFD1028910D6900C64F53 /* homeTableViewController.swift in Sources */,
+				42C0D69B2890103C0083779E /* songListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
